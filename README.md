@@ -1,2 +1,8 @@
-# gh-automation
-This repo is the single source of truth for pipelines that are shared across Keptn repos
+# Keptn GH Actions DevOps Collection
+
+This repo contains shared GitHub Actions workflows that are used by multiple repos under the Keptn GitHub organization.
+
+## Workflows
+| Name | Filename | Description | Inputs | Outputs |
+|------|----------|-------------|--------|---------|
+| DCO | `dco.yml` | Checks the [Developer Certificate of Origin](https://developercertificate.org/) on a PR or on a default branch. | None | None |
