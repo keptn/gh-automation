@@ -1,0 +1,67 @@
+name: Pre-release integration
+on:
+  workflow_call:
+    inputs:
+      PRERELEASE_KEYWORD:
+        description: "Pre release keyword, e.g., next"
+        required: false
+        type: string
+        default: "next"
+    outputs:
+      RELEASE_TAG:
+        description: "Release Tag for Github release"
+        value: ${{ jobs.pre-release.outputs.tag-name }}
+defaults:
+  run:
+    shell: bash
+env:
+  NODE_VERSION: 14 # needed for npx
+  RELEASE_NOTES_FILE: "RELEASE-BODY.md"
+  PRERELEASE_KEYWORD: ${{ inputs.PRERELEASE_KEYWORD }}
+jobs:
+  pre-release:
+    runs-on: ubuntu-20.04
+    outputs:
+      tag-name: ${{ steps.create-release-package.outputs.tag-name }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js # needed for npx
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions" # "${{ github.actor }}"
+          git config user.email "actions@github.com" # "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Prepare GitHub Release Notes
+        run: |
+          npx standard-version@^9.3.1 --prerelease "${{ env.PRERELEASE_KEYWORD }}" -i "${{ env.RELEASE_NOTES_FILE }}" --skip.commit --skip.tag --header ""
+
+      - name: Enhance Release Notes with Build Metadata
+        run: |
+          echo "#### Build Information" >> "${{ env.RELEASE_NOTES_FILE }}"
+          echo "" >> "${{ env.RELEASE_NOTES_FILE }}"
+          echo "**GitHub Actions Run:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "${{ env.RELEASE_NOTES_FILE }}"
+
+      - name: Create pre-release package
+        id: create-release-package
+        run: |
+          echo "🚀 Creating pre-release package now..."
+          npx standard-version@^9.3.1 --prerelease "${{ env.PRERELEASE_KEYWORD }}" --skip.commit --skip.changelog
+
+          echo "::set-output name=tag-name::$(git describe --tags --abbrev=0)"
+          echo "⚡️ Pushing changes to remote repository..."
+          git push --follow-tags
+
+      - name: Create GitHub Release
+        env:
+          RELEASE_TAG: ${{ steps.create-release-package.outputs.tag-name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$RELEASE_TAG" --prerelease --notes-file "${{ env.RELEASE_NOTES_FILE }}" --title "$RELEASE_TAG"
