@@ -58,7 +58,7 @@ jobs:
 
           # create a commit with the changelog
           git add CHANGELOG.md
-          git commit -s -m "chore(release): $TAG"
+          git commit -s -m "build(release): $TAG"
 
       - name: Push changes to repo
         id: push-changes
