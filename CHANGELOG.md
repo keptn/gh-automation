@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/keptn/gh-automation/compare/v1.1.0...v1.2.0) (2021-12-06)
+
+
+### Features
+
+* Add pre-release and release workflow for integrations ([#7](https://github.com/keptn/gh-automation/issues/7)) ([45f56a1](https://github.com/keptn/gh-automation/commit/45f56a19251e8e2835a9f580f65e10449f3b8b2b))
+* Add semantic PR/commit check workflow ([#6](https://github.com/keptn/gh-automation/issues/6)) ([4a45172](https://github.com/keptn/gh-automation/commit/4a451727adf6f53497663bb52fb224385fdb3909))
+
 ## [1.1.0](https://github.com/keptn/gh-automation/compare/v1.0.0...v1.1.0) (2021-10-27)
 
 
