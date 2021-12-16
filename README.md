@@ -34,6 +34,10 @@ The following re-usable actions are available:
 * `DOCKERFILE`: Dockerfile to be used in docker build
 * `TARGET`: Target to be built using docker build
 
+**Outputs**:
+* `BUILD_METADATA`: Docker build Metadata, see [Docker Build Push Action Docs](https://github.com/docker/build-push-action#outputs)
+
+
 **Example Usage**:
 ```yaml
       - name: Docker Build

@@ -28,6 +28,10 @@ inputs:
     description: "Target to be built using docker build"
     required: false
     default: ''
+outputs:
+  BUILD_METADATA:
+    description: Docker Build metadata 
+    value: ${{ steps.docker_build_image.outputs.metadata }}
 runs:
   using: "composite"
   steps: 
