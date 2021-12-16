@@ -28,6 +28,14 @@ inputs:
     description: "Target to be built using docker build"
     required: false
     default: ''
+  PULL:
+    description: "Whether or not to pull the image before building (i.e., to make use of cached layers)"
+    required: false
+    default: 'false'    
+  PUSH:
+    description: "Whether or not to push the image to the desired registry"
+    required: false
+    default: 'true'
 outputs:
   BUILD_METADATA:
     description: Docker Build metadata 
@@ -67,6 +75,6 @@ runs:
         context: .
         tags: ${{ inputs.TAGS }}
         build-args: ${{ inputs.BUILD_ARGS }}
-        push: true
-        pull: false
+        push: ${{ inputs.PUSH }}
+        pull: ${{ inputs.PULL }}
         target: ${{ inputs.TARGET }}
