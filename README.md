@@ -33,6 +33,8 @@ The following re-usable actions are available:
 * `GITHUB_TOKEN`: Github Access token used for pushing to ghcr.io - leave empty if you don't want to push to ghcr.io
 * `DOCKERFILE`: Dockerfile to be used in docker build
 * `TARGET`: Target to be built using docker build
+* `PULL`: Whether or not to pull the image before building (i.e., to make use of cached layers)
+* `PUSH`: Whether or not to push the image to the desired registries
 
 **Outputs**:
 * `BUILD_METADATA`: Docker build Metadata, see [Docker Build Push Action Docs](https://github.com/docker/build-push-action#outputs)
