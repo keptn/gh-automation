@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/keptn/gh-automation/compare/v1.2.0...v1.3.0) (2021-12-16)
+
+
+### Features
+
+* Added docker-build-action ([#8](https://github.com/keptn/gh-automation/issues/8)) ([ae30a28](https://github.com/keptn/gh-automation/commit/ae30a285d85436084024fd544c64ce4fafe3083b))
+* Added input for pull and push on docker build ([#9](https://github.com/keptn/gh-automation/issues/9)) ([cc37394](https://github.com/keptn/gh-automation/commit/cc37394cea0ce0c7717988d2a8376cc30bef1cd5))
+
 ## [1.2.0](https://github.com/keptn/gh-automation/compare/v1.1.0...v1.2.0) (2021-12-06)
 
 
