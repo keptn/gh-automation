@@ -12,6 +12,7 @@ The following re-usable workflows are available:
 | Validate Semantic PR    | `validate-semantic-pr.yml`    | Checks for [Semantic PR messages](https://www.conventionalcommits.org/en/v1.0.0/) in order to enhance release note generation | `types`: List of types <br/>`scopes`: List of scopes | None |
 | Pre-Release Integration | `pre-release-integration.yml` | Creates a pre-release of a Keptn integration | `PRERELEASE_KEYWORD`: Keyword for pre-releases, e.g., `alpha`, `next` | `RELEASE_TAG` |
 | Release Integration     | `release-integration.yml`     | Creates a release of a Keptn integration | None | `RELEASE_TAG` |
+| Prepare CI Run          | `prepare-ci.yml`              | Determines Git Commit Hash, next version, Datetime | None | `BRANCH`<br/>`BRANCH_SLUG`<br/>`VERSION`<br/>`DATETIME`<br/>`GIT_SHA` |
 
 ## Actions
 
