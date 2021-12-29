@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/keptn/gh-automation/compare/v1.3.0...v1.4.0) (2021-12-29)
+
+
+### Features
+
+* added prepare-ci workflow ([#10](https://github.com/keptn/gh-automation/issues/10)) ([4d873e4](https://github.com/keptn/gh-automation/commit/4d873e45b18063e8cf4ca2f3243ad73afce1b027))
+
 ## [1.3.0](https://github.com/keptn/gh-automation/compare/v1.2.0...v1.3.0) (2021-12-16)
 
 
