@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/keptn/gh-automation/compare/v1.4.0...v1.4.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* release integration workflow needs to create a PR towards the github_ref ([#12](https://github.com/keptn/gh-automation/issues/12)) ([8c9044d](https://github.com/keptn/gh-automation/commit/8c9044d4667957ae26e75e907a8ecb76050b0edd))
+
 ## [1.4.0](https://github.com/keptn/gh-automation/compare/v1.3.0...v1.4.0) (2021-12-29)
 
 
