@@ -1,6 +1,12 @@
 name: Release integration
 on:
   workflow_call:
+    inputs:
+      draft:
+        type: boolean
+        description: 'Whether or not a draft release should be created (default: true)'
+        required: false
+        default: true
     outputs:
       RELEASE_TAG:
         description: "Release Tag for Github release"
@@ -91,4 +97,4 @@ jobs:
           RELEASE_TAG: ${{ steps.create-release-package.outputs.tag-name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$RELEASE_TAG" --draft --notes-file "${{ env.RELEASE_NOTES_FILE }}" --title "$RELEASE_TAG"
+          gh release create "$RELEASE_TAG" --draft=${{ inputs.draft }} --notes-file "${{ env.RELEASE_NOTES_FILE }}" --title "$RELEASE_TAG"
