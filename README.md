@@ -11,7 +11,7 @@ The following re-usable workflows are available:
 | DCO                     | `dco.yml`                     | Checks the [Developer Certificate of Origin](https://developercertificate.org/) on a PR or on a default branch. |`exclude-emails`: Comma-separated list of emails that should be ignored during DCO checks | None |
 | Validate Semantic PR    | `validate-semantic-pr.yml`    | Checks for [Semantic PR messages](https://www.conventionalcommits.org/en/v1.0.0/) in order to enhance release note generation | `types`: List of types <br/>`scopes`: List of scopes | None |
 | Pre-Release Integration | `pre-release-integration.yml` | Creates a pre-release of a Keptn integration | `PRERELEASE_KEYWORD`: Keyword for pre-releases, e.g., `alpha`, `next` | `RELEASE_TAG` |
-| Release Integration     | `release-integration.yml`     | Creates a release of a Keptn integration | None | `RELEASE_TAG` |
+| Release Integration     | `release-integration.yml`     | Creates a (draft) release of a Keptn integration | `draft` (default: true) | `RELEASE_TAG` |
 | Prepare CI Run          | `prepare-ci.yml`              | Determines Git Commit Hash, next version, Datetime | None | `BRANCH`<br/>`BRANCH_SLUG`<br/>`VERSION`<br/>`DATETIME`<br/>`GIT_SHA` |
 
 ## Actions

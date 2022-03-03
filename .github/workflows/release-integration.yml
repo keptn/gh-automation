@@ -1,6 +1,12 @@
 name: Release integration
 on:
   workflow_call:
+    inputs:
+      draft:
+        type: string
+        description: 'Whether or not a draft release should be created (default: true)'
+        required: false
+        default: 'true'
     outputs:
       RELEASE_TAG:
         description: "Release Tag for Github release"
@@ -11,6 +17,7 @@ defaults:
 env:
   NODE_VERSION: 14 # needed for npx
   RELEASE_NOTES_FILE: "RELEASE-BODY.md"
+  CREATE_DRAFT_RELEASE: ${{ inputs.draft }}
 jobs:
   pre-release:
     runs-on: ubuntu-20.04
@@ -91,4 +98,9 @@ jobs:
           RELEASE_TAG: ${{ steps.create-release-package.outputs.tag-name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$RELEASE_TAG" --draft --notes-file "${{ env.RELEASE_NOTES_FILE }}" --title "$RELEASE_TAG"
+          PARAMS=""
+          if [[ "${CREATE_DRAFT_RELEASE}" == "true" ]]; then
+            PARAMS="--draft "
+          fi
+
+          gh release create "$RELEASE_TAG" $PARAMS --notes-file "${{ env.RELEASE_NOTES_FILE }}" --title "$RELEASE_TAG"
