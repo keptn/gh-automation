@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/keptn/gh-automation/compare/v1.4.1...v1.5.0) (2022-03-03)
+
+
+### Features
+
+* Add ability to toggle draft release creation for release-integration workflow ([#14](https://github.com/keptn/gh-automation/issues/14)) ([60c567d](https://github.com/keptn/gh-automation/commit/60c567d2ef878b70f28f9fe70b77a4ef2db8b249))
+
 ### [1.4.1](https://github.com/keptn/gh-automation/compare/v1.4.0...v1.4.1) (2022-01-26)
 
 
