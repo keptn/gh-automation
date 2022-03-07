@@ -1,8 +1,5 @@
 name: 'Docker Build Push'
 description: 'Docker build and Push'
-defaults:
-  run:
-    shell: bash
 inputs:
   TAGS:
     description: "List of images/tags to be pushed, e.g., keptncontrib/my-service:1.2.3"
@@ -71,6 +68,7 @@ runs:
         env-file: .ci_env
 
     - name: Normalize TAGS
+      shell: bash
       id: normalize_tags
       run: echo "::set-output name=tags::$(echo '${{ inputs.TAGS }}' | tr '[:upper:]' '[:lower:]')"
 
