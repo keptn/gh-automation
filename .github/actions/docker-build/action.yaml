@@ -67,13 +67,18 @@ runs:
       with:
         env-file: .ci_env
 
+    - name: Normalize TAGS
+      shell: bash
+      id: normalize_tags
+      run:  echo "::set-output name=tags::$(echo ${{ inputs.TAGS }} | tr '[:upper:]' '[:lower:]')"
+
     - id: docker_build_image
       name: "Docker Build"
       uses: docker/build-push-action@v2
       with:
         file: ${{ inputs.DOCKERFILE }}
         context: .
-        tags: ${{ inputs.TAGS }}
+        tags: ${{ steps.normalize_tags.outputs.tags }}
         build-args: ${{ inputs.BUILD_ARGS }}
         push: ${{ inputs.PUSH }}
         pull: ${{ inputs.PULL }}
