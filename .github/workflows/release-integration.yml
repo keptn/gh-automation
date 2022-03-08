@@ -89,7 +89,7 @@ jobs:
           RELEASE_TAG: ${{ steps.create-release-package.outputs.tag-name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --title "chore: Release notes for $RELEASE_TAG" --body "**This is an automated PR for release notes of $RELEASE_TAG!**" --base "${GITHUB_REF##*/}"
+          gh pr create --title "chore: Release notes for $RELEASE_TAG" --body "**This is an automated PR for release notes of $RELEASE_TAG!**" --base "${GITHUB_REF_NAME}"
 
 
       - name: Create GitHub Release
