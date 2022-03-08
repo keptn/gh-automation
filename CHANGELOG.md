@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/keptn/gh-automation/compare/v1.5.0...v1.5.1) (2022-03-08)
+
+
+### Bug Fixes
+
+* Fix base branch identifier for pull requests in release workflow ([#16](https://github.com/keptn/gh-automation/issues/16)) ([605b380](https://github.com/keptn/gh-automation/commit/605b380b1e7fb04c50d54d8bf9bb347c74c6277f))
+* Normalize docker tags ([#15](https://github.com/keptn/gh-automation/issues/15)) ([b151dd6](https://github.com/keptn/gh-automation/commit/b151dd63be534ca077cdd2d2c59e6d4e60fab5b0))
+
 ## [1.5.0](https://github.com/keptn/gh-automation/compare/v1.4.1...v1.5.0) (2022-03-03)
 
 
