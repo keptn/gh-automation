@@ -70,7 +70,12 @@ runs:
     - name: Normalize TAGS
       shell: bash
       id: normalize_tags
-      run: echo "::set-output name=tags::$(echo '${{ inputs.TAGS }}' | tr '[:upper:]' '[:lower:]')"
+      run: |
+        tags=$(echo '${{ inputs.TAGS }}' | tr '[:upper:]' '[:lower:]')
+        tags="${tags//'%'/'%25'}"
+        tags="${tags//$'\n'/'%0A'}"
+        tags="${tags//$'\r'/'%0D'}"
+        echo "::set-output name=tags::$tags"
 
     - id: docker_build_image
       name: "Docker Build"
