@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/keptn/gh-automation/compare/v1.5.1...v1.5.2) (2022-04-01)
+
+
+### Bug Fixes
+
+* Fix missing tags after tag normalization ([#18](https://github.com/keptn/gh-automation/issues/18)) ([50bf330](https://github.com/keptn/gh-automation/commit/50bf3307a5ee0be2baf9e2a47549821171a5d312))
+
 ### [1.5.1](https://github.com/keptn/gh-automation/compare/v1.5.0...v1.5.1) (2022-03-08)
 
 
