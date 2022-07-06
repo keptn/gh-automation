@@ -18,10 +18,10 @@ The following re-usable workflows are available:
 
 The following re-usable actions are available:
 
-| Name                    | Filename                                     | Description                        | Inputs                    | Outputs     |
-|-------------------------|----------------------------------------------|------------------------------------|---------------------------|-------------|
-| Docker Build            | `actions/docker-build/action.yaml`           | Docker Login, Build and Push       | See [Docker Build Action](#docker-build-action) | -           |
-
+| Name              | Filename                                | Description                  | Inputs                                          | Outputs |
+|-------------------|-----------------------------------------|------------------------------|-------------------------------------------------|---------|
+| Docker Build      | `actions/docker-build/action.yaml`      | Docker Login, Build and Push | See [Docker Build Action](#docker-build-action) | -       |
+| Build Helm Charts | `actions/build-helm-charts/action.yaml` | Lints and builds Helm chart  | See [Build Helm Charts](#build-helm-charts)     | -       |
 
 ### Docker Build Action
 
@@ -59,4 +59,26 @@ The following re-usable actions are available:
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           DOCKERFILE: Dockerfile
+```
+
+### Build Helm Charts 
+
+**Inputs**:
+* `VERSION`: Version of your Helm chart e.g., 0.7.2-next.0
+* `APP_VERSION`: Helm Chart app version
+* `CHART_NAME`: Name used in the Helm chart e.g., job-executor-service
+* `BASE_PATH`: Base path the action should execute Helm commands from
+* `CHARTS_PATHS`: Path of your Helm chart directory relative to the BASE_PATH
+* `OUTPUT_DIRECTORY`: Directory the chart will be output into
+
+**Example Usage**:
+
+```yaml
+  - name: Build Helm Charts
+    id: build_helm_charts
+    uses: keptn/gh-automation/.github/actions/build-helm-charts@v1.6
+    with:
+      VERSION: ${{ env.VERSION }}
+      APP_VERSION: ${{ env.VERSION }}.${{ env.DATETIME }}
+      CHART_NAME: ${{ env.IMAGE }}
 ```

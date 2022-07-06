@@ -1,0 +1,58 @@
+name: 'Build Helm Charts'
+description: 'Build helm charts'
+inputs:
+  VERSION:
+    description: "Version of your Helm chart e.g., 0.7.2-next.0"
+    required: true
+  APP_VERSION:
+    default: ""
+    description: "Helm Chart app version"
+    required: false
+  CHART_NAME:
+    description: "Name used in the Helm chart e.g., job-executor-service"
+    required: true
+  BASE_PATH:
+    default: '.'
+    description: "Base path the action should execute Helm commands from"
+    required: false
+  CHARTS_PATHS:
+    default: 'chart'
+    description: "Path of your Helm chart directory relative to the BASE_PATH"
+    required: false
+  OUTPUT_DIRECTORY:
+    default: 'installer'
+    description: "Directory the chart will be output into"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Validate APP_VERSION value
+      id: validate_version
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.APP_VERSION }}" ]; then
+          echo "No APP_VERSION Tag set, defaulting to version"
+          echo "::set-output name=app_version::${{inputs.VERSION}}"
+        else
+          echo "::set-output name=app_version::${{inputs.APP_VERSION}}"
+        fi
+
+    - name: Lint the Helm chart
+      id: lint_chart
+      shell: bash
+      run: helm lint ${{ inputs.BASE_PATH }}/${{ inputs.CHARTS_PATHS }} --strict
+
+    - name: Package Helm chart
+      id: package_chart
+      shell: bash
+      run: helm package ${{ inputs.BASE_PATH }}/${{ inputs.CHARTS_PATHS }} --app-version "${{ steps.validate_version.outputs.app_version }}" --version "${{ inputs.VERSION }}"
+
+    - name: Create output directory
+      id: create_output_directory
+      shell: bash
+      run: mkdir -p ${{ inputs.OUTPUT_DIRECTORY }}
+
+    - name: Move Helm chart into directory
+      id: move_chart_into_directory
+      shell: bash
+      run: mv "${{ inputs.CHART_NAME }}-${{ inputs.VERSION }}.tgz" "${{ inputs.OUTPUT_DIRECTORY }}/${{ inputs.CHART_NAME }}-${{ inputs.VERSION }}.tgz"
