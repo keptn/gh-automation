@@ -8,8 +8,8 @@ inputs:
     default: ""
     description: "Helm Chart app version"
     required: false
-  IMAGE:
-    description: "Image used in the Helm chart e.g., job-executor-service"
+  CHART_NAME:
+    description: "Name used in the Helm chart e.g., job-executor-service"
     required: true
   BASE_PATH:
     default: '.'
@@ -31,7 +31,7 @@ runs:
       shell: bash
       run: |
         if [ -z "${{ inputs.APP_VERSION }}" ]; then
-          echo "No Image Tag set, defaulting to version"
+          echo "No APP_VERSION Tag set, defaulting to version"
           echo "::set-output name=app_version::${{inputs.VERSION}}"
         else
           echo "::set-output name=app_version::${{inputs.APP_VERSION}}"
@@ -55,4 +55,4 @@ runs:
     - name: Move Helm chart into directory
       id: move_chart_into_directory
       shell: bash
-      run: mv "${{ inputs.IMAGE }}-${{ inputs.VERSION }}.tgz" "${{ inputs.OUTPUT_DIRECTORY }}/${{ inputs.IMAGE }}-${{ inputs.VERSION }}.tgz"
+      run: mv "${{ inputs.CHART_NAME }}-${{ inputs.VERSION }}.tgz" "${{ inputs.OUTPUT_DIRECTORY }}/${{ inputs.CHART_NAME }}-${{ inputs.VERSION }}.tgz"
