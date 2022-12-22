@@ -95,8 +95,8 @@ The following re-usable actions are available:
 **Example Usage**:
 
 ```yaml
-  - name: Build Helm Charts
-    id: build_helm_charts
+  - name: Get run id
+    id: get_run_id
     uses: keptn/gh-automation/.github/actions/last-successful-run@v1.7
     with:
       branch: "main"
