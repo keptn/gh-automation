@@ -1,0 +1,38 @@
+name: "Get last successful run id"
+description: "Get the ID of the last successful run of a given branch"
+inputs:
+  branch:
+    required: false
+    description: "The branch that should be checked"
+    default: "main"
+  workflow-file:
+    required: false
+    description: "The workflow that should be checked"
+    default: "CI.yaml"
+  include-bot-runs:
+    required: false
+    description: "Set to true/false wether or not Bot runs should be checked too"
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Find latest successful run ID
+      id: last_run_id
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        INCLUDE_BOT: ${{ inputs.include-bot-runs }}
+      run: |
+        if [[ "$INCLUDE_BOT" = "true" ]]; then
+          INCLUDE_BOT_CHECK = 'and (.head_commit.author.name | endswith("[bot]") | not )'
+        fi
+        RUN_ID=$(\
+          curl -sL \
+            -H 'Accept: application/vnd.github.v3+json' \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            "api.github.com/repos/${{ github.repository }}/actions/workflows/${{ inputs.workflow-file }}/runs?branch=${{ inputs.branch }}" | \
+          jq '[.workflow_runs[] | select(
+            (.head_commit != null) $INCLUDE_BOT_CHECK and ( .conclusion == "success" ) 
+          )][0] | .id')
+        echo "Run ID that will be used to download artifacts from: $RUN_ID"
+        echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT

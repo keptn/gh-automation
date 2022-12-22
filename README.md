@@ -18,10 +18,11 @@ The following re-usable workflows are available:
 
 The following re-usable actions are available:
 
-| Name              | Filename                                | Description                  | Inputs                                          | Outputs |
-|-------------------|-----------------------------------------|------------------------------|-------------------------------------------------|---------|
-| Docker Build      | `actions/docker-build/action.yaml`      | Docker Login, Build and Push | See [Docker Build Action](#docker-build-action) | -       |
-| Build Helm Charts | `actions/build-helm-charts/action.yaml` | Lints and builds Helm chart  | See [Build Helm Charts](#build-helm-charts)     | -       |
+| Name                       | Filename                                  | Description                                    | Inputs                                                 | Outputs |
+|----------------------------|-------------------------------------------|------------------------------------------------|--------------------------------------------------------|---------|
+| Docker Build               | `actions/docker-build/action.yaml`        | Docker Login, Build and Push                   | See [Docker Build Action](#docker-build-action)        | -       |
+| Build Helm Charts          | `actions/build-helm-charts/action.yaml`   | Lints and builds Helm chart                    | See [Build Helm Charts](#build-helm-charts)            | -       |
+| Get last successful run ID | `actions/last-successful-run/action.yaml` | Fetches the run ID of the last successful run  | See [Get last successful run ID](#last-successful-run) | RUN_ID  |
 
 ### Docker Build Action
 
@@ -81,4 +82,24 @@ The following re-usable actions are available:
       VERSION: ${{ env.VERSION }}
       APP_VERSION: ${{ env.VERSION }}.${{ env.DATETIME }}
       CHART_NAME: ${{ env.IMAGE }}
+```
+
+
+### Get last successful run ID
+
+**Inputs**:
+* `branch`: The branch that should be checked. default: `main`
+* `workflow-file`: The workflow that should be checked. default: `CI.yaml`
+* `include-bot-runs`: Wether or not, workflow runs from bot accounts should be considered too. default: `true`
+
+**Example Usage**:
+
+```yaml
+  - name: Build Helm Charts
+    id: build_helm_charts
+    uses: keptn/gh-automation/.github/actions/last-successful-run@v1.7
+    with:
+      branch: "main"
+      workflow-file: "CI.yaml"
+      include-bot-runs: "true"
 ```
